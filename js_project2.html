@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link rel="stylesheet" type="text/css" href="project2.css" />
+  </head>
+  <body>
+    <div id="main">
+      <div id="frame">
+        <div id="frame1">
+          <div class="box">
+            <h3>Hit</h3>
+            <div class="field" id="field1">1</div>
+          </div>
+          <div class="box">
+            <h3>Timer</h3>
+            <div class="field" id="field2">60</div>
+          </div>
+          <div class="box">
+            <h3>Score</h3>
+            <div class="field" id="field3">0</div>
+          </div>
+        </div>
+        <div id="frame2"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let countt = 60;
+    let score = 0;
+    let AA = 0;
+
+    document.querySelector("#frame2").addEventListener("click", (detail) => {
+      let value = Number(detail.target.textContent);
+      if (value === AA) {
+        scoreUpdate();
+        creatBubble();
+        getHit();
+      }
+    });
+
+    function scoreUpdate() {
+      score += 10;
+      document.querySelector("#field3").textContent = score;
+    }
+
+    function getHit() {
+      AA = Math.floor(Math.random() * 10);
+      document.querySelector("#field1").textContent = AA;
+    }
+
+    function creatBubble() {
+      let count = "";
+
+      for (let i = 0; i <= 125; i++) {
+        let A = Math.floor(Math.random() * 21);
+
+        count += `  <div class="bublle">${A}</div> `;
+      }
+
+      document.querySelector("#frame2").innerHTML = count;
+    }
+
+    function timer() {
+      let A = setInterval(() => {
+        if (countt > 0) {
+          countt--;
+          document.querySelector("#field2").textContent = countt;
+        } else {
+          clearInterval(A);
+          document.querySelector("#frame2").innerHTML = `<h1>GAME OVER!</h1>`;
+        }
+      }, 1000);
+    }
+
+    timer();
+  </script>
+</html>
